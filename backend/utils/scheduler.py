@@ -1,5 +1,6 @@
 from backend.model.Route import Route
 from backend.state import STATE, GRAPH
+from backend.utils.audit import log_event
 from backend.utils.dijkstra import dijkstra
 from backend.utils.Enums import RobotStatus, OrderStatus
 
@@ -29,4 +30,5 @@ def assign_nearest_idle_robot(order):
     order.status = OrderStatus.IN_PROGRESS
     STATE["routes"].append(Route(robot=selected_robot.name, order=order.name, path=full_path))
 
+    log_event("ORDER_ASSIGNED", {"order": order.name, "robot": selected_robot.name})
     return selected_robot.name

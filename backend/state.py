@@ -1,4 +1,6 @@
 from typing import List, Dict
+
+from backend.model import AuditEvent
 from backend.model.Edge import Edge
 from backend.model.Graph import Graph
 from backend.model.Order import Order
@@ -12,6 +14,7 @@ from backend.utils.Enums import RobotStatus, OrderStatus
 STATE: Dict[str, List] = {
     "orders": [],
     "robots": [],
+    "routes": [],
 }
 
 GRAPH: Graph = Graph(
@@ -45,3 +48,5 @@ SEED_ORDERS = [
 def graph_nodes_set() -> set:
     return set(GRAPH.nodes)
 
+
+EVENTS: List[AuditEvent] = []

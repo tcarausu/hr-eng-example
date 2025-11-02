@@ -1,6 +1,7 @@
 from enum import Enum
 
 class RobotStatus(str, Enum):
+    """Status of a robot in the system."""
     IDLE = "IDLE"
     EXECUTING = "EXECUTING"
 
