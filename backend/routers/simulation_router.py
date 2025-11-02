@@ -26,13 +26,12 @@ async def get_routes():
 
 @router.post("/tick")
 async def tick() -> Dict[str, str]:
-    routes = list(STATE.get("routes", []))  # clone to avoid mutation during iteration
     completed = []
 
-    for route in routes:
-        robot = next((r for r in STATE["robots"] if r.name == route["robot"]), None)
-        order = next((o for o in STATE["orders"] if o.name == route["order"]), None)
-        path = route.get("path", [])
+    for route in STATE["routes"]:
+        robot = next((r for r in STATE["robots"] if r.name == route.robot), None)
+        order = next((o for o in STATE["orders"] if o.name == route.order), None)
+        path = route.path  # ✅ This is a direct reference
 
         if not robot or not order or not path:
             continue
@@ -46,7 +45,6 @@ async def tick() -> Dict[str, str]:
             order.status = OrderStatus.DONE
             completed.append(route)
 
-    # Remove completed routes
-    STATE["routes"] = [r for r in STATE.get("routes", []) if r not in completed]
-    return {"status": "ok", "completed": [r["order"] for r in completed]}
+    STATE["routes"] = [r for r in STATE["routes"] if r not in completed]
+    return {"status": "ok", "completed": [r.order for r in completed]}
 

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from backend.model.Order import Order
-from backend.schemas.API_Schema import AddOrderRequest, OrdersResponse
+from backend.model.API_Schema import AddOrderRequest, OrdersResponse
 from backend.state import STATE, graph_nodes_set
 from backend.utils.Enums import OrderStatus
 

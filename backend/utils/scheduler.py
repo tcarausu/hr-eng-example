@@ -1,8 +1,12 @@
+from backend.model.Route import Route
 from backend.state import STATE, GRAPH
-from backend.utils.pathfinding import dijkstra
+from backend.utils.dijkstra import dijkstra
 from backend.utils.Enums import RobotStatus, OrderStatus
 
 def assign_nearest_idle_robot(order):
+    if order.status != OrderStatus.NEW:
+        return None
+
     idle_robots = [r for r in STATE["robots"] if r.status == RobotStatus.IDLE]
     if not idle_robots:
         return None
@@ -23,9 +27,6 @@ def assign_nearest_idle_robot(order):
     # Update state
     selected_robot.status = RobotStatus.EXECUTING
     order.status = OrderStatus.IN_PROGRESS
-    STATE["routes"] = STATE.get("routes", []) + [{
-        "robot": selected_robot.name,
-        "path": full_path,
-        "order": order.name,
-    }]
+    STATE["routes"].append(Route(robot=selected_robot.name, order=order.name, path=full_path))
+
     return selected_robot.name
