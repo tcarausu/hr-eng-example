@@ -1,7 +1,12 @@
 fastapi
 pydantic
-Requests
+requests
 uvicorn
 pytest
 pytest-asyncio
 httpx
+#db ones
+sqlalchemy
+psycopg2-binary     # PostgreSQL driver for SQLAlchemy
+asyncpg
+alembic               # for migrations

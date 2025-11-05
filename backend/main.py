@@ -1,14 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from contextlib import asynccontextmanager
 from backend.routers import router as core_router
-from backend.state import STATE, SEED_ORDERS, SEED_ROBOTS
-
-@asynccontextmanager
-async def lifespan(app):
-    STATE["orders"] = list(SEED_ORDERS)
-    STATE["robots"] = list(SEED_ROBOTS)
-    yield
 
 app = FastAPI(
     title="AGV Scheduling Exercise API",
@@ -16,9 +8,8 @@ app = FastAPI(
     description=(
         "Modular backend for robot scheduling and simulation.\n\n"
         "Endpoints: /orders, /robots, /simulation.\n"
-        "State is in-memory and resets on restart."
+        "State is fully database-backed."
     ),
-    lifespan=lifespan,
 )
 
 # CORS for local dev frontends (Vite/Next/CRA)

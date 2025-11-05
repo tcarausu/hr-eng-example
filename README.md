@@ -42,7 +42,7 @@ Choose 3-5
 
 [] Zones/blocked edges: Support temporarily blocked edges (maintenance) and zone constraints (e.g., robots with capability: {zone: 'cold'} only).
 
-[] Persistence: Swap in SQLite or TinyDB; add /reset to re-seed for tests.
+-[x] Persistence: Swap in SQLite or TinyDB; add /reset to re-seed for tests.
 
 [] WebSocket/SSE: Push robot/ order updates instead of polling; keep /tick but notify subscribers.
 
@@ -52,7 +52,7 @@ Choose 3-5
 
 [] Heuristic tuning: Pluggable cost function (e.g., penalize congestion, prefer wider edges); expose GET /metrics (avg wait time, utilization).
 
-[] Idempotency & concurrency: Make POST /addOrder idempotent via Idempotency-Key; protect scheduler with a lock to avoid race conditions under parallel ticks.
+-[x] Idempotency & concurrency: Make POST /addOrder idempotent via Idempotency-Key; protect scheduler with a lock to avoid race conditions under parallel ticks.
 
 [] Explainability endpoint: GET /explain/assignments/{order} returns the decision tree (distances considered, tie-breaks, constraints causing rejections).
 

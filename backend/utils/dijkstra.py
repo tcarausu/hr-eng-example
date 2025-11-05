@@ -3,6 +3,7 @@ from math import inf
 
 from backend.model.Graph import Graph
 
+
 def dijkstra(graph: Graph, start: str, end: str) -> tuple[int, list[str]]:
     queue = [(0, start, [])]
     visited = set()
@@ -18,10 +19,10 @@ def dijkstra(graph: Graph, start: str, end: str) -> tuple[int, list[str]]:
 
         for edge in graph.edges:
             neighbors = []
-            if edge.from_ == node:
-                neighbors.append(edge.to)
-            elif edge.to == node:
-                neighbors.append(edge.from_)
+            if edge.from_node == node:
+                neighbors.append(edge.to_node)
+            elif edge.to_node == node:
+                neighbors.append(edge.from_node)
 
             for neighbor in neighbors:
                 if neighbor not in visited:
